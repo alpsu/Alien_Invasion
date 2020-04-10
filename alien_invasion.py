@@ -33,6 +33,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
     def _check_events(self):
@@ -79,6 +80,10 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
 
+    def _update_aliens(self):
+        ''' Обновляет позиции всех пришельцев '''
+        self.aliens.update()
+
     def _create_fleet(self):
         ''' Создание флота вторжения. '''
         # Создание пришельца и вычисление количества пришельцев в ряду
@@ -90,8 +95,8 @@ class AlienInvasion:
 
         # Определяет количество рядов, помещающихся на экране.
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - 
-                            (3 * alien_height) - ship_height)
+        available_space_y = (self.settings.screen_height -
+                             (3 * alien_height) - ship_height)
         number_rows = available_space_y // (2 * alien_height)
 
         # Создание флота вторжения
